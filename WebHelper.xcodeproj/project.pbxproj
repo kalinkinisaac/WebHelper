@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7393D2DD1C81F9DF00A08552 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7393D2DC1C81F9DF00A08552 /* main.cpp */; };
+		7393D2E81C81FFFB00A08552 /* IP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7393D2E61C81FFFB00A08552 /* IP.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		7393D2D91C81F9DF00A08552 /* WebHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WebHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		7393D2DC1C81F9DF00A08552 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		7393D2E61C81FFFB00A08552 /* IP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IP.cpp; path = ../IP.cpp; sourceTree = "<group>"; };
+		7393D2E71C81FFFB00A08552 /* IP.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IP.hpp; path = ../IP.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,8 @@
 		7393D2DB1C81F9DF00A08552 /* WebHelper */ = {
 			isa = PBXGroup;
 			children = (
+				7393D2E61C81FFFB00A08552 /* IP.cpp */,
+				7393D2E71C81FFFB00A08552 /* IP.hpp */,
 				7393D2DC1C81F9DF00A08552 /* main.cpp */,
 			);
 			path = WebHelper;
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7393D2E81C81FFFB00A08552 /* IP.cpp in Sources */,
 				7393D2DD1C81F9DF00A08552 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +243,7 @@
 				7393D2E21C81F9DF00A08552 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

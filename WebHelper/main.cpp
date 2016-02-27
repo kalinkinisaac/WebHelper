@@ -1,15 +1,8 @@
-//
-//  main.cpp
-//  WebHelper
-//
-//  Created by Исаак Калинкин  on 27.02.16.
-//  Copyright © 2016 EduAppHelpeer. All rights reserved.
-//
-
 #include <iostream>
+#include "IP.hpp"
+using namespace std;
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+int main() {
+    //GUI initialization
     return 0;
 }
