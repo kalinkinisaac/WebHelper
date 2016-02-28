@@ -9,15 +9,49 @@
 #ifndef IP_hpp
 #define IP_hpp
 
-#include <stdio.h>
-class IP
+#include <iostream>
+using namespace std;
+class BitComponent
 {
-    int bitIP;
-    IP();
-    IP(int input);
-    IP(const IP& ip);
+protected:
+    bool *bit;
+public:
+    BitComponent();
+    BitComponent(bool *new_bit);
+    BitComponent operator*=(BitComponent& rhs);
+    bool* GetBit();
+    bool* GetQuadrant(int id);
+    bool &operator[](int index);
 };
-IP Parse(int input);
-int Convert10to2(int input);
-int Convert2to10(int input);
+BitComponent operator*(BitComponent& lhs, BitComponent& rhs);
+
+class Mask : BitComponent
+{
+protected:
+    int reservedBits;
+public:
+
+    Mask();
+    Mask(int new_reservedBits);
+    void SetReservedBits(int new_reservedBits);
+};
+class IP : BitComponent
+{
+protected:
+    Mask mask;
+public:
+    IP(string input);
+    IP(const IP& ip);
+    void SetBitIP(BitComponent new_bit_ip);
+    void SetIP(string IP);
+    void SetMask(Mask new_mask);
+    string GetIP();
+    string GetNetID();
+    string GetHostNum();
+    int GetCapacity();
+};
+bool InputChecker(string input);
+BitComponent Parse(string input);
+bool *Convert10to2(int input);
+int Convert2to10(int *input);
 #endif /* IP_hpp */
