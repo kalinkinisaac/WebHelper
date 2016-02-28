@@ -9,13 +9,15 @@
 #include "IP.hpp"
 BitComponent::BitComponent()
 {
+    this->bit = new bool[32];
     for(int i = 0; i < 32; i++)
-        bit[i] = false;
+        this->bit[i] = false;
 }
 BitComponent::BitComponent(bool* new_bit)
 {
+    this->bit = new bool[32];
     for(int i = 0; i < 32; i++)
-        bit[i] = new_bit[i];
+        this->bit[i] = new_bit[i];
 }
 BitComponent BitComponent::operator*=(BitComponent& rhs)
 {
@@ -35,14 +37,11 @@ bool &BitComponent::operator[](int index)
 {
     return this->bit[index];
 }
-bool* BitComponent::GetBit()
+/*bool* BitComponent::GetBit()
 {
     return bit;
-}
-bool* BitComponent::GetQuadrant(int id)
-{
-    return bit + 8 * id;
-}
+}*/
+
 //==-Mask-====================================
 
 Mask::Mask()
@@ -56,31 +55,51 @@ Mask::Mask(int reservedBits)
 void Mask::SetReservedBits(int new_reservedBits)
 {
     for(int i = 0; i < new_reservedBits; i++)
-        bit[i] = true;
+        this->bit[i] = true;
     this->reservedBits = new_reservedBits;
 }
 
 IP::IP(string input)
 {
-    }
+    SetBitIP(Parse(input));
+}
 void IP::SetBitIP(BitComponent new_bit_ip)
 {
-    *this->bit = *new_bit_ip.GetBit();
+    this->bit = new bool[32];
+    for(int i = 0; i < 32; i++)
+        this->bit[i] = new_bit_ip[i];
+}
+void IP::Manager(string h_input)
+{
+    string ip, r_bits;
+    for(int i = 0, a = 0; i < h_input.length(); i++)
+    {
+        if(h_input[i] == '/')
+        {
+            a = 1;
+            continue;
+        }
+        if(!a)
+            ip += h_input[i];
+        else
+            r_bits += h_input[i];
+    }
+    SetBitIP(Parse(ip));
+    mask = *new Mask(r_bits);
 }
 BitComponent Parse(string input)
 {
     BitComponent result;
     int buffer = 0;
-    for(int i = 0; i < 4; i++)
+    for(int i = 0, c = 0; i < 4; i++, c++)
     {
-        for(int j = 0; j < 3; j++)
-            if(input[i + j] == '.')
-                break;
-            else
-                buffer = 10*buffer + (int)input[i + j] - '0';
+        while((input[c] != '.') && (c < input.length())){
+                buffer = 10*buffer + (int)input[c] - '0';
+            c++;
+        }
         bool *quad_result = Convert10to2(buffer);
         for(int a = 0; a < 8; a++)
-            result.GetBit()[8*i + a] = quad_result[a];
+            result[8*i + a] = quad_result[a];
         buffer = 0;
     }
     return result;
@@ -101,7 +120,7 @@ bool *Convert10to2(int input)
     std::reverse(Bin.begin(), Bin.end());
     for(int i = 0; i < 8 - Bin.length(); i++)
         result[i] = false;
-    for(int i = 8 - (int)Bin.length(); i < 8; i++)
-        result[i] = (bool)((int)Bin[i] - '0');
+    for(int i = 0; i < Bin.length(); i++)
+        result[i + 8 - Bin.length()] = Bin[i] - '0';
     return result;
 }

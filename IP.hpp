@@ -14,14 +14,14 @@ using namespace std;
 class BitComponent
 {
 protected:
-    bool *bit;
+        bool *bit;
 public:
+
     BitComponent();
     BitComponent(bool *new_bit);
     BitComponent operator*=(BitComponent& rhs);
-    bool* GetBit();
-    bool* GetQuadrant(int id);
     bool &operator[](int index);
+    //bool* GetBit();
 };
 BitComponent operator*(BitComponent& lhs, BitComponent& rhs);
 
@@ -33,9 +33,10 @@ public:
 
     Mask();
     Mask(int new_reservedBits);
+    Mask(string new_reservedBits);
     void SetReservedBits(int new_reservedBits);
 };
-class IP : BitComponent
+class IP : public BitComponent
 {
 protected:
     Mask mask;
@@ -45,6 +46,7 @@ public:
     void SetBitIP(BitComponent new_bit_ip);
     void SetIP(string IP);
     void SetMask(Mask new_mask);
+    void Manager(string h_input);
     string GetIP();
     string GetNetID();
     string GetHostNum();
@@ -53,5 +55,5 @@ public:
 bool InputChecker(string input);
 BitComponent Parse(string input);
 bool *Convert10to2(int input);
-int Convert2to10(int *input);
+int Convert2to10(bool *input);
 #endif /* IP_hpp */
